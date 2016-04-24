@@ -25,6 +25,7 @@ user_guide/
 .idea/*
 .buildpath
 .project
+.settings/
 
 ## Sublime Text cache files
 *.tmlanguage.cache
