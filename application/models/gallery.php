@@ -12,7 +12,7 @@ class Gallery extends CI_Model
 	public function getAll() {
 		$return_data = array();
 	
-		$this->db->order_by('id', 'ASC');
+		$this->db->order_by('id', 'DESC');
 	
 		if(! $query = $this->db->get('gallery')) {
 			return $this->db->error();
@@ -28,8 +28,10 @@ class Gallery extends CI_Model
 	public function getLastPhotoGalleries($pLimit = null) {
 		$return_data = array();
 	
-		$this->db->order_by('id', 'ASC');
+		$this->db->order_by('date', 'DESC');
+		$this->db->order_by('id', 'DESC');
 		$this->db->where('gallery_type_id_fk', 1);
+		$this->db->where('active', 1);
 
 		if($pLimit) {
 			$this->db->limit(20);
@@ -49,7 +51,7 @@ class Gallery extends CI_Model
 	public function getLastMovieGalleries($pLimit = null) {
 		$return_data = array();
 	
-		$this->db->order_by('id', 'ASC');
+		$this->db->order_by('id', 'DESC');
 		$this->db->where('gallery_type_id_fk', 2);
 		if($pLimit) {
 			$this->db->limit(20);
@@ -308,6 +310,7 @@ class Gallery extends CI_Model
 	
 	public function getInitializedPhotoGalleries($pLimit) {
 		$this->db->limit($pLimit);
+		$this->db->order_by('id', 'DESC');
 		if(! $query = $this->db->get_where('gallery', array('gallery_type_id_fk' => 1, 'active' => 0, 'zip_complete' => 0, 'cover_complete' => 0))) {
 			return false;
 		} else {
@@ -355,6 +358,15 @@ class Gallery extends CI_Model
 		$update_data = array(
 				'active' => $pActiveStatus,
 				'activation_date' => date("Y-m-d")
+		);
+		$this->db->where('id', $pGalleryId);
+		$this->db->update('gallery', $update_data);
+	}
+
+	public function updateCoverDimentions($pGalleryId, $pWidth, $pHeight) {
+		$update_data = array(
+				'cover_width' => $pWidth,
+				'cover_height' => $pHeight
 		);
 		$this->db->where('id', $pGalleryId);
 		$this->db->update('gallery', $update_data);

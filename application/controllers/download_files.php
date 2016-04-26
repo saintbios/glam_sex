@@ -34,9 +34,12 @@ class Download_files extends CI_Controller {
 						//FIFTH : download cover
 						if($coverUrl = $this->downloadCover($gallery)) {
 							$this->gallery->updateCoverUrl($gallery->id, $coverUrl);
-							$this->gallery->updateCoverStatus($gallery->id, 1);
-							$this->gallery->updateActiveStatus($gallery->id, 1);
-							
+							if($this->getImgSize($gallery)) {
+								$this->gallery->updateCoverStatus($gallery->id, 1);
+								$this->gallery->updateActiveStatus($gallery->id, 1);
+								//SIXTH = delete zip file
+								$this->deleteZipFile($gallery->id);
+							}
 						}
 					}
 				}
@@ -99,5 +102,18 @@ class Download_files extends CI_Controller {
 		} else {
 			return false;
 		}
+	}
+
+	private function getImgSize($pGallery) {
+		if($imgSize = getimagesize($this->imgsDestinationFolder.$pGallery->id.'/glam-sex_'.$pGallery->id.'_cover.jpg')) {
+			$this->gallery->updateCoverDimentions($pGallery->id, $imgSize[0], $imgSize[1]);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private function deleteZipFile($pGalleryId) {
+		return unlink($this->zipDestinationFolder.$pGalleryId.'.zip');
 	}
 }

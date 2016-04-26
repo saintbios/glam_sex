@@ -149,7 +149,7 @@
                                 </div>
                             </div>
                             
-                            <img class="img-responsive" src="assets/images/models/<?php echo($model->id);?>/glam-sex_headshot_<?php echo($model->id);?>.jpg" alt="<?php echo($model->name);?>">
+                            <img class="img-responsive" src="assets/images/models/<?php echo($model->id);?>/glam-sex_<?php echo($model->id);?>_headshot.jpg" alt="<?php echo($model->name);?>">
                         </a>
                         <div class="additional-info-thumbnail-under">
                             <div class="additional-info-thumbnail-under-model">

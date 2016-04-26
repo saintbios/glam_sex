@@ -30,11 +30,13 @@ class Glamsex_model extends CI_Model
 		}
 	}
 
-	public function getLast($pLimit = null)
-	{
-	$return_data = array();
+	public function getLast($pLimit = null) {
+		$return_data = array();
 		
 		$this->db->order_by('id', 'DESC');
+		$this->db->where('active', 1);
+		$this->db->where('headshot_width', 229);
+
 		if($pLimit) {
 			$this->db->limit($pLimit);
 		}
@@ -153,5 +155,36 @@ class Glamsex_model extends CI_Model
 			$this->db->where('id', $pModelId);
 			$this->db->update('model', $update_data);
 		}
+	}
+
+	public function getByActive($pLimit, $pActive) {
+		$this->db->limit($pLimit);
+		if(! $query = $this->db->get_where('model', array('active' => $pActive))) {
+			return false;
+		} else {
+			if ($query->num_rows() > 0) {
+				return $query->result();
+			} else {
+				return false;
+			}
+		}
+	}
+
+	public function updateActiveStatus($pModelId, $pActiveStatus) {
+		$update_data = array(
+				'active' => $pActiveStatus,
+				'activation_date' => date("Y-m-d")
+		);
+		$this->db->where('id', $pModelId);
+		$this->db->update('model', $update_data);
+	}
+
+	public function updateHeadshotDimentions($pModelId, $pWidth, $pHeight) {
+		$update_data = array(
+				'headshot_width' => $pWidth,
+				'headshot_height' => $pHeight
+		);
+		$this->db->where('id', $pModelId);
+		$this->db->update('model', $update_data);
 	}
 }
