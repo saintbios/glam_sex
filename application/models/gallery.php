@@ -25,36 +25,16 @@ class Gallery extends CI_Model
 		}
 	}
 
-	public function getLastPhotoGalleries($pLimit = null) {
+	public function getLastGalleries($pType = 1, $pLimit = null) {
 		$return_data = array();
 	
 		$this->db->order_by('date', 'DESC');
 		$this->db->order_by('id', 'DESC');
-		$this->db->where('gallery_type_id_fk', 1);
+		$this->db->where('gallery_type_id_fk', $pType);
 		$this->db->where('active', 1);
 
 		if($pLimit) {
-			$this->db->limit(20);
-		}
-		
-		if(! $query = $this->db->get('gallery')) {
-			return $this->db->error();
-		} else {
-			if ($query->num_rows() > 0) {
-				return $query->result();
-			} else {
-				return false;
-			}
-		}
-	}
-
-	public function getLastMovieGalleries($pLimit = null) {
-		$return_data = array();
-	
-		$this->db->order_by('id', 'DESC');
-		$this->db->where('gallery_type_id_fk', 2);
-		if($pLimit) {
-			$this->db->limit(20);
+			$this->db->limit($pLimit);
 		}
 		
 		if(! $query = $this->db->get('gallery')) {
@@ -308,10 +288,10 @@ class Gallery extends CI_Model
 		return $pId;
 	}
 	
-	public function getInitializedPhotoGalleries($pLimit) {
+	public function getInitializedGalleries($pType, $pLimit) {
 		$this->db->limit($pLimit);
 		$this->db->order_by('id', 'DESC');
-		if(! $query = $this->db->get_where('gallery', array('gallery_type_id_fk' => 1, 'active' => 0, 'zip_complete' => 0, 'cover_complete' => 0))) {
+		if(! $query = $this->db->get_where('gallery', array('gallery_type_id_fk' => $pType, 'active' => 0, 'zip_complete' => 0, 'cover_complete' => 0))) {
 			return false;
 		} else {
 			if ($query->num_rows() > 0) {

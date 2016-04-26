@@ -17,17 +17,18 @@ class Home extends CI_Controller {
 		//Récupération des 20 derniers models
 		$models = $this->glamsex_model->getLast(20);
 		//Récupération des 20 dernières galleries photo
-		$photoGalleries = $this->gallery->getLastPhotoGalleries(20);
+		$photoGalleries = $this->gallery->getLastGalleries(1, 20);
 		//var_dump($photoGalleries);
 		
 
 		//Récupération des 20 derniers films
-		$movieGalleries = $this->gallery->getLastMovieGalleries(20);
+		$movieGalleries = $this->gallery->getLastGalleries(2, 20);
 		//var_dump($movieGalleries);
 		//exit(0);
 
 		$data['models'] = $models;
 		$data['photoGalleries'] = $photoGalleries;
+		$data['filmGalleries'] = $filmGalleries;
 
 		$this->load->view('test_home', $data);
 	}

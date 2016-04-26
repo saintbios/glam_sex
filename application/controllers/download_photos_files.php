@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Download_files extends CI_Controller {
+class Download_photos_files extends CI_Controller {
 
 	function __construct() {
 		// Construct our parent class
@@ -13,7 +13,7 @@ class Download_files extends CI_Controller {
 	
 	public function init($pLimit) {
 		$this->load->model('gallery', NULL, TRUE);
-		if($galleries = $this->gallery->getInitializedPhotoGalleries($pLimit)) {
+		if($galleries = $this->gallery->getInitializedGalleries(1, $pLimit)) {
 			foreach($galleries as $gallery) {
 				//FIRST : check if cover url contains "cover-rss.jpg" >> no zip dl, update cover status
 				if(strpos($gallery->cover_url, 'cover-rss.jpg')) {

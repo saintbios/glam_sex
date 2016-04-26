@@ -12,33 +12,6 @@
     <!--<script src="https://code.jquery.com/jquery-1.12.3.min.js"-->
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="assets/js/bootstrap/3.3.6/bootstrap.min.js"></script>
-    <script>
-    $('btnShowFilms').click(function(){
-
-    });
-
-    $('btnShowPhotos').click(function(){
-        showPhotoGalleries();
-    });
-
-    $('btnShowModels').click(function(){
-        alert('btnShowModels');
-        showModels();
-    });
-
-    function showModels() {
-        alert('showModels');
-        $('galeriesContainer').hide();
-        $('modelsContainer').show();
-    }
-
-    function showPhotoGalleries() {
-        alert('showGalleries');
-        $('modelsContainer').hide();
-        $('galeriesContainer').show();
-    }
-
-    </script>
 </head>
 <body>
 	<div class="navbar navbar-inverse" role="navigation">
@@ -85,85 +58,118 @@
     </div>
     
     <div class="container categories-container">
-        <div class="category-container" id="btnShowFilms" onclick="alert('toto');">
+        <div  data-toggle="tab" href="#filmsContainer" class="category-container">
         FILMS
         </div>
 
-        <div class="category-container" id="btnShowModels" onclick="showModels();">
+        <div  data-toggle="tab" href="#modelsContainer" class="category-container">
             MODELS
         </div>
 
-        <div class="category-container" id="btnShowPhotos">
+        <div   data-toggle="tab" href="#photosContainer"class="category-container">
             PHOTOS
         </div>
     </div>
-    
-    <div id="galeriesContainer">
-    <div class="container">
-        <div class="element-list">
-            <ul class="list-inline list-unstyled">
-                <?php
-                foreach($photoGalleries as $photoGallery) {
-                ?>
-                    <li class="gallery-img-container" onmouseover="$('1').show();" onmouseout="$('1').hide();">
-                        <a href="#">
-                            <!-- GALLERY NAME ON HOVER-->
-                            <div class="additional-info-thumbnail-hover" id="1">
-                                <div>
-                                    <span><?php echo($photoGallery->name);?></span>
-                                    <span>By Catherine</span>
-                                </div>
-                            </div>
-                            
-                            <img class="img-responsive" src="assets/images/galleries/<?php echo($photoGallery->id);?>/glam-sex_<?php echo($photoGallery->id);?>_cover.jpg" alt="<?php echo($photoGallery->name);?>">
-                        </a>
-                        <div class="additional-info-thumbnail-under">
-                            <div class="additional-info-thumbnail-under-model">
-                                <a href="#"><?php echo($photoGallery->name);?></a>
-                            </div>
-                            <div class="additional-info-thumbnail-under-cplt">
-                                <span class=""><?php echo(date('M d, Y', strtotime($photoGallery->date)));?></span>
-                            </div>
-                        </div>
-                    </li>
-                <?php
-                }
-                ?>
-            </ul>
-        </div>
-    </div>
-    </div>
-
-    <div class="container" id="modelsContainer">
-        <div class="element-list">
-            <ul class="list-inline list-unstyled">
-                <?php
-                foreach($models as $key => $model) {
+    <div class="tab-content">
+        <div id="filmsContainer" class="container tab-pane fade in active">
+            <div class="element-list">
+                <ul class="list-inline list-unstyled">
+                    <?php
+                    foreach($filmGalleries as $filmGallery) {
                     ?>
-                    <li class="model-img-container" onmouseover="" onmouseout="">
-                        <a href="model/<?php echo($model->id);?>">
-                            <!-- GALLERY NAME ON HOVER-->
-                            <div class="additional-info-thumbnail-hover" id="<?php echo($model->id);?>">
-                                <div>
-                                    <span><?php echo($model->name);?></span>
+                        <li class="gallery-img-container" onmouseover="$('1').show();" onmouseout="$('1').hide();">
+                            <a href="#">
+                                <!-- GALLERY NAME ON HOVER-->
+                                <div class="additional-info-thumbnail-hover" id="1">
+                                    <div>
+                                        <span><?php echo($filmGallery->name);?></span>
+                                        <span>By Catherine</span>
+                                    </div>
+                                </div>
+                                
+                                <img class="img-responsive" src="assets/images/galleries/<?php echo($filmGallery->id);?>/glam-sex_<?php echo($filmGallery->id);?>_cover.jpg" alt="<?php echo($filmGallery->name);?>">
+                            </a>
+                            <div class="additional-info-thumbnail-under">
+                                <div class="additional-info-thumbnail-under-model">
+                                    <a href="#"><?php echo($filmGallery->name);?></a>
+                                </div>
+                                <div class="additional-info-thumbnail-under-cplt">
+                                    <span class=""><?php echo(date('M d, Y', strtotime($filmGallery->date)));?></span>
                                 </div>
                             </div>
-                            
-                            <img class="img-responsive" src="assets/images/models/<?php echo($model->id);?>/glam-sex_<?php echo($model->id);?>_headshot.jpg" alt="<?php echo($model->name);?>">
-                        </a>
-                        <div class="additional-info-thumbnail-under">
-                            <div class="additional-info-thumbnail-under-model">
-                                <a href="model/<?php echo($model->id);?>"><?php echo($model->name);?></a>
+                        </li>
+                    <?php
+                    }
+                    ?>
+                </ul>
+            </div>
+        </div>
+
+        <div id="photosContainer" class="container tab-pane fade">
+            <div class="element-list">
+                <ul class="list-inline list-unstyled">
+                    <?php
+                    foreach($photoGalleries as $photoGallery) {
+                    ?>
+                        <li class="gallery-img-container" onmouseover="$('1').show();" onmouseout="$('1').hide();">
+                            <a href="#">
+                                <!-- GALLERY NAME ON HOVER-->
+                                <div class="additional-info-thumbnail-hover" id="1">
+                                    <div>
+                                        <span><?php echo($photoGallery->name);?></span>
+                                        <span>By Catherine</span>
+                                    </div>
+                                </div>
+                                
+                                <img class="img-responsive" src="assets/images/galleries/<?php echo($photoGallery->id);?>/glam-sex_<?php echo($photoGallery->id);?>_cover.jpg" alt="<?php echo($photoGallery->name);?>">
+                            </a>
+                            <div class="additional-info-thumbnail-under">
+                                <div class="additional-info-thumbnail-under-model">
+                                    <a href="#"><?php echo($photoGallery->name);?></a>
+                                </div>
+                                <div class="additional-info-thumbnail-under-cplt">
+                                    <span class=""><?php echo(date('M d, Y', strtotime($photoGallery->date)));?></span>
+                                </div>
                             </div>
-                            <div class="additional-info-thumbnail-under-cplt">
-                                <span class="">Apr 18, 2016</span>
+                        </li>
+                    <?php
+                    }
+                    ?>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="modelsContainer" class="container tab-pane fade">
+            <div class="element-list">
+                <ul class="list-inline list-unstyled">
+                    <?php
+                    foreach($models as $key => $model) {
+                        ?>
+                        <li class="model-img-container" onmouseover="" onmouseout="">
+                            <a href="model/<?php echo($model->id);?>">
+                                <!-- GALLERY NAME ON HOVER-->
+                                <div class="additional-info-thumbnail-hover" id="<?php echo($model->id);?>">
+                                    <div>
+                                        <span><?php echo($model->name);?></span>
+                                    </div>
+                                </div>
+                                
+                                <img class="img-responsive" src="assets/images/models/<?php echo($model->id);?>/glam-sex_<?php echo($model->id);?>_headshot.jpg" alt="<?php echo($model->name);?>">
+                            </a>
+                            <div class="additional-info-thumbnail-under">
+                                <div class="additional-info-thumbnail-under-model">
+                                    <a href="model/<?php echo($model->id);?>"><?php echo($model->name);?></a>
+                                </div>
+                                <div class="additional-info-thumbnail-under-cplt">
+                                    <span class="">Apr 18, 2016</span>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                <?php
-                }
-                ?>
-            </ul>
+                        </li>
+                    <?php
+                    }
+                    ?>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -215,9 +221,6 @@
         </div>
     </div>
 </body>
-<script type="text/javascript">
-showModels();
-</script>
 </html>
 
 
