@@ -6,7 +6,7 @@ class Download_movie_files extends CI_Controller {
 	function __construct() {
 		// Construct our parent class
 		parent::__construct();
-		$this->imgsDestinationFolder = './assets/images/galeries/';
+		$this->imgsDestinationFolder = './assets/images/galleries/';
 		set_time_limit(0);
 	}
 	
@@ -30,12 +30,17 @@ class Download_movie_files extends CI_Controller {
 	private function downloadCover($pGallery) {
 		$coverUrl = 'https://www.metart.com/media/' . $pGallery->metart_id . '/cover_' . $pGallery->metart_id . '.jpg';
 		$coverFileName = 'glam-sex_' . $pGallery->id . '_cover.jpg';
-		if(!@copy($coverUrl,$this->imgsDestinationFolder . $pGallery->id . '/' . $coverFileName)) {
-			$errors= error_get_last();
-			$this->gallery->updateCoverStatus($pGallery->id, 90);
-			return false;
+		if(mkdir($this->imgsDestinationFolder . $pGallery->id)) {
+			if(!@copy($coverUrl,$this->imgsDestinationFolder . $pGallery->id . '/' . $coverFileName)) {
+				$errors= error_get_last();
+				$this->gallery->updateCoverStatus($pGallery->id, 90);
+				var_dump($errors);
+				return false;
+			} else {
+				return $coverUrl;
+			}
 		} else {
-			return $coverUrl;
+			return false;
 		}
 	}
 
