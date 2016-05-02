@@ -276,6 +276,7 @@ class Gallery extends CI_Model
 		$second = explode('.',$first[count($first)-1]);
 		$metArtId = $second[0];
 		$update_data = array(
+				'date' => $pGallery->date,
 				'rating' => $pGallery->rating,
 				'number_of_pics' => $pGallery->number_of_pics,
 				'rating_date' => date('Y-m-d'),

@@ -10,6 +10,7 @@ class Home extends CI_Controller {
 		$this->load->model('photographer', NULL, TRUE);
 		$this->load->model('glamsex_model', NULL, TRUE);
 		$this->load->model('gallery', NULL, TRUE);
+		$this->load->model('model_gallery', NULL, TRUE);
 	}
 	
 	public function index()
@@ -18,18 +19,32 @@ class Home extends CI_Controller {
 		$models = $this->glamsex_model->getLast(20);
 		//Récupération des 20 dernières galleries photo
 		$photoGalleries = $this->gallery->getLastGalleries(1, 20);
-		//var_dump($photoGalleries);
-		
+		foreach($photoGalleries as $g) {
+			$modelGs = $this->model_gallery->getByGalleryId($g->id);
+			foreach($modelGs as $modelG) {
+				$model = $this->glamsex_model->getById($modelG->model_id);
+				$g->modelId = $modelG->model_id;
+				$g->modelName = $model->name;
+				break;
+			}
+		}
 
 		//Récupération des 20 derniers films
 		$movieGalleries = $this->gallery->getLastGalleries(2, 20);
-		//var_dump($movieGalleries);
-		//exit(0);
+		foreach($movieGalleries as $g) {
+			$modelGs = $this->model_gallery->getByGalleryId($g->id);
+			foreach($modelGs as $modelG) {
+				$model = $this->glamsex_model->getById($modelG->model_id);
+				$g->modelId = $modelG->model_id;
+				$g->modelName = $model->name;
+				break;
+			}
+		}
 
 		$data['models'] = $models;
 		$data['photoGalleries'] = $photoGalleries;
-		$data['filmGalleries'] = $filmGalleries;
+		$data['filmGalleries'] = $movieGalleries;
 
-		$this->load->view('test_home', $data);
+		$this->load->view('home', $data);
 	}
 }
