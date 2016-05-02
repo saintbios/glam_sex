@@ -8,7 +8,7 @@
     <link href='https://fonts.googleapis.com/css?family=Signika:400,700|Open+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Nude photos of <?php echo $model->name;?> in the shooting "<?php echo $gallery->name;?>"</title>
+    <title>Profile of <?php echo $model->name;?> - Sexy node erotic model</title>
     <link rel="stylesheet" href="<?php echo site_url('/assets/css/bootstrap/3.3.6/bootstrap.min.css');?>">
     <link rel="stylesheet" href="<?php echo site_url('/assets/css/global.css');?>">
     <script src="<?php echo site_url('/assets/js/jquery/1.x/jquery-1.12.3.js');?>" crossorigin="anonymous"></script>
@@ -26,11 +26,6 @@
               lessAni: 0
              });
         });
-
-        function updateActiveSlider(pId) {
-            $('.carousel-inner>div, .active').removeClass("active");
-            $('#slider_img_'+pId).addClass("active");
-        }
     </script>
     <?php require("application/libraries/UtilsMetArt.php");?>
 </head>
@@ -65,37 +60,8 @@
         </div>
     </div>
     
-    <div class="panel-group container gallery-header-panels">
-        <div class="panel gallery-panel">
-            <div class="panel-heading">
-                <h3><?php echo $gallery->name;?> <small>Published on <?php echo $gallery->date;?></small></h3>
-            </div>
-            <div class="panel-body">
-                <div class="gallery-cover">
-                    <a href="#" data-toggle="modal" data-target="#modalCover">
-                        <img class="img-responsive gallery-img" src="<?php echo site_url('/assets/images/galleries/'.$gallery->id.'/glam-sex_'.$gallery->id.'_cover.jpg');?>">
-                    </a>
-                </div>
-                <div class="gallery-quote">
-                    <blockquote>
-                        <p><?php echo $gallery->short_description;?></p>
-                        <footer>Metart.com</footer>
-                    </blockquote>
-                </div>
-                <div class="clearfix"></div>
-                <div class="gallery-description" id="gallery-description">
-                    <div style="width:100%;border-bottom:1px solid #DDD;margin-bottom:10px">Shooting description :</div>
-                    <?php
-                    if($gallery->long_description == "") {
-                        echo '<p>No description has been written yet for this gallery.</p>';
-                    } else {
-                        echo '<p>' . $gallery->long_description . '</p>';
-                    }
-                    ?>
-                </div>
-            </div>
-        </div>
-        <div class="panel gallery-panel">
+    <div class="panel-group container model-header-panels">
+        <div class="panel model-panel">
             <div class="panel-heading">
                 <h3><small>Starring</small> <?php echo $model->name;?></h3>
             </div>
@@ -130,10 +96,10 @@
                 <div class="model-description">
                     <div style="width:100%;border-bottom:1px solid #DDD;margin-bottom:10px">Biography :</div>
                     <?php
-                    if($gallery->long_description == "") {
+                    if(($model->bio == "") || ($model->bio == 0)) {
                         echo '<p>' . $model->name . ' has not written her biography yet.</p>';
                     } else {
-                        echo '<p>' . $gallery->long_description . '</p>';
+                        echo '<p>' . $model->bio . '</p>';
                     }
                     ?>
                 </div>
@@ -141,24 +107,80 @@
         </div>
     </div>
     <div class="full-access text-center">
-        This gallery contains <strong><?php echo $gallery->number_of_pics;?> HD nude photos</strong> on its full version on Metart.com !
+        Get the movies and photos in <strong>HD quality and full version</strong> on Metart.com !
     </div>
     <div class="text-center">
         <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/signup/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Join now to get the full access</strong></button></a>
         <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Take a free tour on Metart.com</strong></button></a>
     </div>
-    <div class="panel container element-list gallery-img-list-container">
-        <ul class="list-unstyled list-inline">
-            <?php
-            for($i=1; $i<$gallery->number_of_pics_fhg; $i++) {
-                echo '<li><a href="#" data-toggle="modal" data-target="#modalPhotos" id="thumbnail_' . $i . '" onclick="javascript:updateActiveSlider(' . $i . ')"><img class="img-responsive gallery-img" src="'.site_url('/assets/images/galleries/'.$gallery->id.'/glam-sex_'.$gallery->id.'_'.$i.'.jpg').'"></a></li>';
-            }
-            ?>
-        </ul>
 
+    <div class="panel-container container model-galleries-panel">
+        <?php
+        if($filmGalleries) {
+        ?>
+        <h3>Movies starring <?php echo $model->name;?> :</h3>
+        <div id="filmsContainer" class="container">
+            <div class="element-list">
+                <ul class="list-inline list-unstyled">
+                    <?php
+                    foreach($filmGalleries as $filmGallery) {
+                    ?>
+                        <li class="gallery-img-container">
+                            <a href="<?php echo site_url('/film/' . $filmGallery->id . '/' . UtilsMetArt::toAscii($filmGallery->name));?>">
+                                <img class="img-responsive" src="<?php echo site_url('/assets/images/galleries/' . $filmGallery->id . '/glam-sex_' . $filmGallery->id . '_cover.jpg');?>" alt="<?php echo($filmGallery->name);?>">
+                            </a>
+                            <div class="additional-info-thumbnail-under row">
+                                <div class="additional-info-thumbnail-under-model col-xs-12 col-md-6">
+                                    <a href="<?php echo site_url('/model/' . $filmGallery->modelId . '/' . UtilsMetArt::toAscii($filmGallery->modelName));?>"><?php echo($filmGallery->name);?></a>
+                                </div>
+                                <div class="additional-info-thumbnail-under-cplt col-xs-12 col-md-6">
+                                    <span class=""><?php echo(date('M d, Y', strtotime($filmGallery->date)));?></span>
+                                </div>
+                            </div>
+                        </li>
+                    <?php
+                    }
+                    ?>
+                </ul>
+            </div>
+        </div>
+        <?php
+        }
+        if($photoGalleries) {
+        ?>
+        <h3>Photo galleries starring <?php echo $model->name;?> :</h3>
+        <div id="photosContainer" class="container">
+            <div class="element-list">
+                <ul class="list-inline list-unstyled">
+                    <?php
+                    foreach($photoGalleries as $photoGallery) {
+                    ?>
+                        <li class="gallery-img-container">
+                            <a href="<?php echo site_url('/photos/'.$photoGallery->id.'/'.UtilsMetArt::toAscii($photoGallery->name));?>">                                
+                                <img class="img-responsive" src="<?php echo site_url('/assets/images/galleries/' . $photoGallery->id . '/glam-sex_' . $photoGallery->id . '_cover.jpg');?>" alt="<?php echo($photoGallery->name);?>">
+                            </a>
+                            <div class="additional-info-thumbnail-under row">
+                                <div class="additional-info-thumbnail-under-model col-xs-12 col-md-6">
+                                    <a href="<?php echo site_url('/model/' . $model->id . '/' . UtilsMetArt::toAscii($model->name));?>"><?php echo($photoGallery->name);?></a>
+                                </div>
+                                <div class="additional-info-thumbnail-under-cplt col-xs-12 col-md-6">
+                                    <span class=""><?php echo(date('M d, Y', strtotime($photoGallery->date)));?></span>
+                                </div>
+                            </div>
+                        </li>
+                    <?php
+                    }
+                    ?>
+                </ul>
+            </div>
+        </div>
+        <?php
+        }
+        ?>
     </div>
+
     <div class="full-access text-center">
-        This gallery contains <strong><?php echo $gallery->number_of_pics;?> HD nude photos</strong> on its full version on Metart.com !
+        Get the movies and photos in <strong>HD quality and full version</strong> on Metart.com !
     </div>
     <div class="text-center">
         <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/signup/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Join now to get the full access</strong></button></a>
@@ -213,75 +235,5 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="modalCover" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <?php echo '<h3>' . $gallery->name . ' <small>starring</small> ' . $model->name . '</h3>';?>
-          </div>
-          <div class="modal-body">
-            <a href="<?php echo('https://access.metart.com/track/1025.MA.1.2.5.0.0/model/' . UtilsMetArt::toAscii($model->name) . '/gallery/' . str_replace('-', '', $gallery->date) . '/' . $gallery->name . '/');?>" target="blank">
-                <img class="img-responsive gallery-img-modal" src="<?php echo site_url('/assets/images/galleries/'.$gallery->id.'/glam-sex_'.$gallery->id.'_cover.jpg');?>">
-            </a>
-          </div>
-          <div class="modal-footer">
-            <div class="text-center">
-                <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/signup/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Join now to get full access to the HD galleries and films</strong></button></a>
-            </div>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="modalPhotos" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <?php
-                echo '<h3>' . $gallery->name . ' <small>starring</small> ' . $model->name . '</h3>';
-            ?>
-          </div>
-          <div class="modal-body">
-            
-            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
-
-              <!-- Wrapper for slides -->
-              <div class="carousel-inner" role="listbox">
-                <?php
-                for($i=1; $i < $gallery->number_of_pics_fhg; $i++) {
-                ?>
-                    <div class="item <?php if($i==1) echo 'active';?> text-center" id="slider_img_<?php echo $i;?>">
-                        <a href="<?php echo('https://access.metart.com/track/1025.MA.1.2.5.0.0/model/' . UtilsMetArt::toAscii($model->name) . '/gallery/' . str_replace('-', '', $gallery->date) . '/' . $gallery->name . '/');?>" target="blank">
-                            <?php echo '<img class="img-responsive gallery-img-slideshow" src="'.site_url('/assets/images/galleries/'.$gallery->id.'/glam-sex_'.$gallery->id.'_'.$i.'.jpg').'">';?>
-                        </a>
-                    </div>
-                <?php
-                }
-                ?>
-              </div>
-
-              <!-- Controls -->
-              <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                
-              </a>
-              <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                
-              </a>
-            </div>
-
-          </div>
-          <div class="modal-footer">
-            <div class="text-center">
-                <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/signup/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Join now to get full access to the HD galleries and films</strong></button></a>
-            </div>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
 </body>
 </html> 

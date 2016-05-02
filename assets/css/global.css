@@ -433,3 +433,35 @@
     .btn-lecture:hover {
         cursor:pointer;
     }
+
+    /*************/
+    /*PAGE FILMS */
+    /*************/
+    .film-title {
+        margin-bottom:15px;
+    }
+
+    .film-title>h3 {
+        font-size:18px;
+        font-weight:bold;
+        margin : 0;
+    }
+
+    /**************/
+    /*PAGE MODELS */
+    /**************/
+    .model-header-panels {
+        padding:0;
+    }
+
+    .model-panel {
+        border:1px solid #EEE;
+        width:100%;
+        background-color:#F9F9F9;
+    }
+
+    .model-panel h3, .model-galleries-panel h3 {
+        font-size:18px;
+        font-weight:bold;
+        margin : 0;
+    }

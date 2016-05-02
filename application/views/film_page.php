@@ -54,6 +54,10 @@
     </div>
     
     <div class="container player-container">
+        <div class="film-title">
+            <h3><?php echo $film->name;?> <small>Published on <?php echo $film->date;?> - Starring </small><?php echo $model->name;?></h3>
+        </div>
+        
         <div  id="divEmbed" class="embed-responsive embed-responsive-16by9">
            <img src="https://static.metart.com/media/<?php echo $film->metart_id;?>/wide_<?php echo $film->metart_id;?>.jpg">
         </div>

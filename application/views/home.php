@@ -88,20 +88,12 @@
                     foreach($filmGalleries as $filmGallery) {
                     ?>
                         <li class="gallery-img-container">
-                            <a href="<?php echo site_url('/films/' . $filmGallery->id . '/' . UtilsMetArt::toAscii($filmGallery->name));?>">
-                                <!-- GALLERY NAME ON HOVER-->
-                                <!--<div class="additional-info-thumbnail-hover img-responsive">
-                                    <div>
-                                        <span><?php echo($filmGallery->name);?></span>
-                                        <span>By Catherine</span>
-                                    </div>
-                                </div>-->
-                                
+                            <a href="<?php echo site_url('/film/' . $filmGallery->id . '/' . UtilsMetArt::toAscii($filmGallery->name));?>">
                                 <img class="img-responsive" src="<?php echo site_url('/assets/images/galleries/' . $filmGallery->id . '/glam-sex_' . $filmGallery->id . '_cover.jpg');?>" alt="<?php echo($filmGallery->name);?>">
                             </a>
                             <div class="additional-info-thumbnail-under row">
                                 <div class="additional-info-thumbnail-under-model col-xs-12 col-md-6">
-                                    <a href="<?php echo site_url('/models/' . $filmGallery->modelId . '/' . UtilsMetArt::toAscii($filmGallery->modelName));?>"><?php echo($filmGallery->modelName);?></a>
+                                    <a href="<?php echo site_url('/model/' . $filmGallery->modelId . '/' . UtilsMetArt::toAscii($filmGallery->modelName));?>"><?php echo($filmGallery->modelName);?></a>
                                 </div>
                                 <div class="additional-info-thumbnail-under-cplt col-xs-12 col-md-6">
                                     <span class=""><?php echo(date('M d, Y', strtotime($filmGallery->date)));?></span>
@@ -123,19 +115,11 @@
                     ?>
                         <li class="gallery-img-container">
                             <a href="<?php echo site_url('/photos/'.$photoGallery->id.'/'.UtilsMetArt::toAscii($photoGallery->name));?>">
-                                <!-- GALLERY NAME ON HOVER-->
-                                <!--<div class="additional-info-thumbnail-hover">
-                                    <div>
-                                        <span><?php echo($photoGallery->name);?></span>
-                                        <span>By Catherine</span>
-                                    </div>
-                                </div>-->
-                                
                                 <img class="img-responsive" src="<?php echo site_url('/assets/images/galleries/' . $photoGallery->id . '/glam-sex_' . $photoGallery->id . '_cover.jpg');?>" alt="<?php echo($photoGallery->name);?>">
                             </a>
                             <div class="additional-info-thumbnail-under row">
                                 <div class="additional-info-thumbnail-under-model col-xs-12 col-md-6">
-                                    <a href="<?php echo site_url('/models/' . $filmGallery->modelId . '/' . UtilsMetArt::toAscii($filmGallery->modelName));?>"><?php echo($filmGallery->modelName);?></a>
+                                    <a href="<?php echo site_url('/model/' . $filmGallery->modelId . '/' . UtilsMetArt::toAscii($filmGallery->modelName));?>"><?php echo($filmGallery->modelName);?></a>
                                 </div>
                                 <div class="additional-info-thumbnail-under-cplt col-xs-12 col-md-6">
                                     <span class=""><?php echo(date('M d, Y', strtotime($photoGallery->date)));?></span>
@@ -156,19 +140,12 @@
                     foreach($models as $key => $model) {
                         ?>
                         <li class="model-img-container">
-                            <a href="<?php echo site_url('/models/'.$model->id.'/'.UtilsMetArt::toAscii($model->name));?>">
-                                <!-- GALLERY NAME ON HOVER-->
-                                <!--<div class="additional-info-thumbnail-hover" id="<?php echo($model->id);?>">
-                                    <div>
-                                        <span><?php echo($model->name);?></span>
-                                    </div>
-                                </div>-->
-                                
+                            <a href="<?php echo site_url('/model/'.$model->id.'/'.UtilsMetArt::toAscii($model->name));?>">
                                 <img class="img-responsive" src="<?php echo site_url('/assets/images/models/' . $model->id . '/glam-sex_' . $model->id . '_headshot.jpg');?>" alt="<?php echo($model->name);?>">
                             </a>
                             <div class="additional-info-thumbnail-under row">
                                 <div class="additional-info-thumbnail-under-model col-xs-12 col-md-6">
-                                    <a href="<?php echo site_url('/models/'.$model->id.'/'.UtilsMetArt::toAscii($model->name));?>"><?php echo($model->name);?></a>
+                                    <a href="<?php echo site_url('/model/'.$model->id.'/'.UtilsMetArt::toAscii($model->name));?>"><?php echo($model->name);?></a>
                                 </div>
                                 <div class="additional-info-thumbnail-under-cplt col-xs-12 col-md-6">
                                     <span class="">Apr 18, 2016</span>

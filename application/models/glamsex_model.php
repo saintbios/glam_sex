@@ -11,6 +11,8 @@ class Glamsex_model extends CI_Model
 		$this->load->model('ethnicity', NULL, TRUE);
 		$this->load->model('country', NULL, TRUE);
 		$this->load->model('model_tag', NULL, TRUE);
+		$this->load->model('model_gallery', NULL, TRUE);
+		$this->load->model('gallery', NULL, TRUE);
 	}
 	
 	public function getAll()
@@ -38,18 +40,40 @@ class Glamsex_model extends CI_Model
 		$this->db->where('headshot_width', 229);
 
 		if($pLimit) {
-			$this->db->limit($pLimit);
+			$this->db->limit($pLimit+40);
 		}
 		
 		if(! $query = $this->db->get('model')) {
 			return $this->db->error();
 		} else {
 			if ($query->num_rows() > 0) {
-				return $query->result();
+				$models = array();
+				$cpt = 0;
+				foreach($query->result() as $model) {
+					if($this->hasActiveGalleries($model->id)) {
+						$models[] = $model;
+						$cpt++;
+					}
+
+					if($cpt == $pLimit) {
+						return $models;
+					}
+				}
 			} else {
 				return false;
 			}
 		}
+	}
+
+	private function hasActiveGalleries($pModelId) {
+		if($modelGalleries = $this->model_gallery->getByModelId($pModelId)) {
+			foreach($modelGalleries as $modelGallery) {
+				$isActive = $this->gallery->isActive($modelGallery->gallery_id);
+				if($isActive)
+					return true;
+			}
+		}
+		return false;
 	}
 	
 	public function getById($pId)

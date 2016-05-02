@@ -98,6 +98,26 @@ class Gallery extends CI_Model
 			}
 		}
 	}
+
+	public function isActive($pGalleryId) {
+		$this->db->select('active');
+		$this->db->from('gallery');
+		$this->db->where("id",$pGalleryId);
+		if(!$query=$this->db->get()) {
+			return $this->db->error();
+		} else {
+			if ($query->num_rows() > 0) {
+				$gallery = $query->row();
+				if($gallery->active == 1) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		}
+	}
 	
 	public function insert($pGallery, $pInitType) {
 		if(! $gallery = $this->getByNameAndDate($pGallery->name,$pGallery->date)) {
