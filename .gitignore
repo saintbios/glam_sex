@@ -14,7 +14,8 @@ user_guide_src/cilexer/dist/*
 user_guide_src/cilexer/pycilexer.egg-info/*
 /vendor/
 
-assets/images/
+assets/images/galleries/
+assets/images/models/
 assets/img_packages/
 assets/json_data/
 user_guide/
