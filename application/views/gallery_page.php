@@ -141,10 +141,10 @@
         </div>
     </div>
     <div class="full-access text-center">
-        This gallery contains <strong><?php echo $gallery->number_of_pics;?> HD nude photos</strong> on its full version on Metart.com !
+        This gallery contains <strong><?php echo $gallery->number_of_pics;?> Full HD nude photos</strong> on its full version on Metart.com !
     </div>
     <div class="text-center">
-        <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/signup/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Join now to get the full access</strong></button></a>
+        <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/signup/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Join now to get a full access</strong></button></a>
         <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Take a free tour on Metart.com</strong></button></a>
     </div>
     <div class="panel container element-list gallery-img-list-container">
@@ -158,10 +158,10 @@
 
     </div>
     <div class="full-access text-center">
-        This gallery contains <strong><?php echo $gallery->number_of_pics;?> HD nude photos</strong> on its full version on Metart.com !
+        This gallery contains <strong><?php echo $gallery->number_of_pics;?> FullHD nude photos</strong> on its full version on Metart.com !
     </div>
     <div class="text-center">
-        <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/signup/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Join now to get the full access</strong></button></a>
+        <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/signup/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Join now to get a full access</strong></button></a>
         <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Take a free tour on Metart.com</strong></button></a>
     </div>    
 
@@ -228,7 +228,7 @@
           </div>
           <div class="modal-footer">
             <div class="text-center">
-                <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/signup/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Join now to get full access to the HD galleries and films</strong></button></a>
+                <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/signup/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Get access to the Full HD galleries and films</strong></button></a>
             </div>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
@@ -276,7 +276,7 @@
           </div>
           <div class="modal-footer">
             <div class="text-center">
-                <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/signup/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Join now to get full access to the HD galleries and films</strong></button></a>
+                <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/signup/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Get access to the Full HD galleries and films</strong></button></a>
             </div>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>

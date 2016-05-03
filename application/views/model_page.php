@@ -63,7 +63,7 @@
     <div class="panel-group container model-header-panels">
         <div class="panel model-panel">
             <div class="panel-heading">
-                <h3><small>Starring</small> <?php echo $model->name;?></h3>
+                <h3><?php echo $model->name;?></h3>
             </div>
             <div class="panel-body">
                 <div class="gallery-cover">
@@ -114,7 +114,7 @@
         <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Take a free tour on Metart.com</strong></button></a>
     </div>
 
-    <div class="panel-container container model-galleries-panel">
+    <div class="panel container model-galleries-panel">
         <?php
         if($filmGalleries) {
         ?>
@@ -131,7 +131,7 @@
                             </a>
                             <div class="additional-info-thumbnail-under row">
                                 <div class="additional-info-thumbnail-under-model col-xs-12 col-md-6">
-                                    <a href="<?php echo site_url('/model/' . $filmGallery->modelId . '/' . UtilsMetArt::toAscii($filmGallery->modelName));?>"><?php echo($filmGallery->name);?></a>
+                                    <a href="<?php echo site_url('/film/' . $filmGallery->id . '/' . UtilsMetArt::toAscii($filmGallery->name));?>"><?php echo($filmGallery->name);?></a>
                                 </div>
                                 <div class="additional-info-thumbnail-under-cplt col-xs-12 col-md-6">
                                     <span class=""><?php echo(date('M d, Y', strtotime($filmGallery->date)));?></span>

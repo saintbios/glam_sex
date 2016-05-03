@@ -50,7 +50,7 @@ class Models extends CI_Controller {
 			$photoGalleries = $this->sortArray($photoGalleries);
 
 		if(count($movieGalleries) > 1)
-	    	$movieGalleries = $this->sortArray($photoGalleries);
+	    	$movieGalleries = $this->sortArray($movieGalleries);
 
 		$data['model'] = $model;
 		$data['photoGalleries'] = $photoGalleries;
