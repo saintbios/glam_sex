@@ -11,12 +11,32 @@ class Home extends CI_Controller {
 		$this->load->model('glamsex_model', NULL, TRUE);
 		$this->load->model('gallery', NULL, TRUE);
 		$this->load->model('model_gallery', NULL, TRUE);
+		$this->load->helper('form');
+
+		if(!isset($_SESSION))
+			session_start();
+
+		if(!isset($_SESSION['itemsPerPage']))
+			$_SESSION['itemsPerPage'] = 20;
+
+		if(!isset($_SESSION['nbActiveModels']))
+			$_SESSION['nbActiveModels'] = $this->glamsex_model->getNbActive();
+
+		if(!isset($_SESSION['nbActivePhotoGalleries']))
+			$_SESSION['nbActivePhotoGalleries'] = $this->gallery->getNbActive(1);
+
+		if(!isset($_SESSION['nbActiveFilmGalleries']))
+			$_SESSION['nbActiveFilmGalleries'] = $this->gallery->getNbActive(2);
 	}
 	
 	public function index()
 	{
+		/*$nbActivePhotos = $this->gallery->getNbActive(1);
+		$nbActiveFilms = $this->gallery->getNbActive(2);*/
+		
 		//Récupération des 20 derniers models
 		$models = $this->glamsex_model->getLast(20);
+		
 		//Récupération des 20 dernières galleries photo
 		$photoGalleries = $this->gallery->getLastGalleries(1, 20);
 		foreach($photoGalleries as $g) {

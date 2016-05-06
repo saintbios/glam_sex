@@ -118,6 +118,27 @@ class Gallery extends CI_Model
 			}
 		}
 	}
+
+	public function getNbActive($pGalleryType) {
+		$query = $this->db->query("select count(id) as nbActive from gallery g
+		where active = 1
+		and gallery_type_id_fk = " .$pGalleryType);
+		$nbActiveGalleries = $query->row();
+		return $nbActiveGalleries;
+	}
+
+	public function browsePaginated($pGalleryType, $pPage) {
+		$return_data = array();
+		$whereQuery = '';
+
+		$query = $this->db->query("select * from gallery g
+		where active = 1
+		and gallery_type_id_fk = " . $pGalleryType ."
+		order by g.date desc limit " . $_SESSION['itemsPerPage']*($pPage-1) . "," . $_SESSION['itemsPerPage']);
+        
+        $results = $query->result();
+        return $results;
+	}
 	
 	public function insert($pGallery, $pInitType) {
 		if(! $gallery = $this->getByNameAndDate($pGallery->name,$pGallery->date)) {
@@ -226,6 +247,50 @@ class Gallery extends CI_Model
 			return false;
 		}
 		return true;
+	}
+
+	public function search($pSearchValue, $pPage) {
+		$searchValues = explode('+', $pSearchValue);
+		$finalArray = array();
+
+		foreach($searchValues as $searchValue) {
+			if(strlen($searchValue) > 1)
+				$finalArray[] = $searchValue;
+		}
+		$regexpValue = implode('|', $finalArray);
+		$query = $this->db->query("select * from gallery g
+		where active = 1
+		and gallery_type_id_fk = 1
+		and (
+			name REGEXP ('" . $regexpValue . "')
+			or short_description REGEXP ('" . $regexpValue . "')
+			)
+		order by g.date desc limit " . $_SESSION['itemsPerPage']*($pPage-1) . "," . $_SESSION['itemsPerPage']);
+        
+        $results = $query->result();
+        return $results;
+	}
+
+	public function nbSearchResults($pSearchValue) {
+		$searchValues = explode('+', $pSearchValue);
+		$finalArray = array();
+
+		foreach($searchValues as $searchValue) {
+			if(strlen($searchValue) > 1)
+				$finalArray[] = $searchValue;
+		}
+		$regexpValue = implode('|', $finalArray);
+		$query = $this->db->query("select count(id) as nbSearchResults from gallery g
+		where active = 1
+		and gallery_type_id_fk = 1
+		and (
+			name REGEXP ('" . $regexpValue . "')
+			or short_description REGEXP ('" . $regexpValue . "')
+		)
+		order by g.date desc");
+        
+        $results = $query->row();
+        return $results;
 	}
 	
 	private function _insert($pGallery) {

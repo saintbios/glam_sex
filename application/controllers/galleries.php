@@ -7,6 +7,7 @@ class Galleries extends CI_Controller {
 	{
 		// Construct our parent class
 		parent::__construct();
+		$this->load->library('utilsmetart');
 		$this->load->model('photographer', NULL, TRUE);
 		$this->load->model('glamsex_model', NULL, TRUE);
 		$this->load->model('gallery', NULL, TRUE);
@@ -17,6 +18,21 @@ class Galleries extends CI_Controller {
 		$this->load->model('shaved_type', NULL, TRUE);
 		$this->load->model('country', NULL, TRUE);
 		$this->load->model('ethnicity', NULL, TRUE);
+
+		if(!isset($_SESSION))
+			session_start();
+
+		if(!isset($_SESSION['itemsPerPage']))
+			$_SESSION['itemsPerPage'] = 20;
+
+		if(!isset($_SESSION['nbActiveModels']))
+			$_SESSION['nbActiveModels'] = $this->glamsex_model->getNbActive();
+
+		if(!isset($_SESSION['nbActivePhotoGalleries']))
+			$_SESSION['nbActivePhotoGalleries'] = $this->gallery->getNbActive(1);
+
+		if(!isset($_SESSION['nbActiveFilmGalleries']))
+			$_SESSION['nbActiveFilmGalleries'] = $this->gallery->getNbActive(2);
 	}
 	
 	public function displayPhotoGallery($galleryId = '', $galleryName = '')
@@ -66,10 +82,91 @@ class Galleries extends CI_Controller {
 		//Récupération du photographe
 		$photographer = $this->photographer->getById($film->photographer_id_fk);
 		$film->photographerName = $photographer->name;
+		
+		//Récupération des galleries photo
+		$galleries = $this->model_gallery->getByModelId($model->id);
+		$photoGalleries = array();
+		$movieGalleries = array();
+		foreach($galleries as $gallery) {
+			$gallery = $this->gallery->getById($gallery->gallery_id);
+			if($gallery->gallery_type_id_fk == 1) {
+				if($gallery->active == 1)
+					$photoGalleries[] = $gallery;
+			} else {
+				if($gallery->active == 1 && $gallery->id != $film->id)
+					$movieGalleries[] = $gallery;
+			}
+		}
+
+		if(count($photoGalleries) > 1)
+			$photoGalleries = $this->utilsmetart->sortArray($photoGalleries);
+
+		if(count($movieGalleries) > 1)
+	    	$movieGalleries = $this->utilsmetart->sortArray($movieGalleries);
 
 		$data['film'] = $film;
 		$data['model'] = $model;
+		$data['photoGalleries'] = $photoGalleries;
+		$data['filmGalleries'] = $movieGalleries;
 
 		$this->load->view('film_page', $data);
+	}
+
+	public function browseAllPhotoGalleries($pPage) {
+		$galleries = $this->gallery->browsePaginated(1, $pPage);
+		foreach($galleries as $g) {
+			$modelGs = $this->model_gallery->getByGalleryId($g->id);
+			foreach($modelGs as $modelG) {
+				$model = $this->glamsex_model->getById($modelG->model_id);
+				$g->modelId = $modelG->model_id;
+				$g->modelName = $model->name;
+				break;
+			}
+		}
+		$data['galleries'] = $galleries;
+		$data['activePage'] = $pPage;
+		$this->load->view('photo_galleries_page', $data);
+	}
+
+	public function browseAllMovieGalleries($pPage) {
+		$galleries = $this->gallery->browsePaginated(2, $pPage);
+		foreach($galleries as $g) {
+			$modelGs = $this->model_gallery->getByGalleryId($g->id);
+			foreach($modelGs as $modelG) {
+				$model = $this->glamsex_model->getById($modelG->model_id);
+				$g->modelId = $modelG->model_id;
+				$g->modelName = $model->name;
+				break;
+			}
+		}
+		$data['galleries'] = $galleries;
+		$data['activePage'] = $pPage;
+		$this->load->view('film_galleries_page', $data);
+	}
+
+	public function search($pPage) {
+		$searchValue = $this->security->xss_clean($this->input->get('searchvaluesanitized'));
+
+		$galleries = $this->gallery->search($searchValue, $pPage);
+		$_SESSION['nbSearchResults'] = $this->gallery->nbSearchResults($searchValue);
+
+		$searchValueClean = str_replace('+', ' ', $searchValue);
+		$searchValue = str_replace('+', '%2B', $searchValue);
+		foreach($galleries as $g) {
+			$modelGs = $this->model_gallery->getByGalleryId($g->id);
+			foreach($modelGs as $modelG) {
+				$model = $this->glamsex_model->getById($modelG->model_id);
+				$g->modelId = $modelG->model_id;
+				$g->modelName = $model->name;
+				break;
+			}
+		}
+
+		$returnData['galleries'] = $galleries;
+		$returnData['activePage'] = $pPage;
+		$returnData['searchValueClean'] = $searchValueClean;
+		$returnData['searchValue'] = $searchValue;
+		
+		$this->load->view('search', $returnData);
 	}
 }

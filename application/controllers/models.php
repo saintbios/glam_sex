@@ -17,6 +17,21 @@ class Models extends CI_Controller {
 		$this->load->model('shaved_type', NULL, TRUE);
 		$this->load->model('country', NULL, TRUE);
 		$this->load->model('ethnicity', NULL, TRUE);
+
+		if(!isset($_SESSION))
+			session_start();
+
+		if(!isset($_SESSION['itemsPerPage']))
+			$_SESSION['itemsPerPage'] = 20;
+
+		if(!isset($_SESSION['nbActiveModels']))
+			$_SESSION['nbActiveModels'] = $this->glamsex_model->getNbActive();
+
+		if(!isset($_SESSION['nbActivePhotoGalleries']))
+			$_SESSION['nbActivePhotoGalleries'] = $this->gallery->getNbActive(1);
+
+		if(!isset($_SESSION['nbActiveFilmGalleries']))
+			$_SESSION['nbActiveFilmGalleries'] = $this->gallery->getNbActive(2);
 	}
 	
 	public function displayModel($modelId = '', $modelName = '')
@@ -56,6 +71,13 @@ class Models extends CI_Controller {
 		$data['photoGalleries'] = $photoGalleries;
 		$data['filmGalleries'] = $movieGalleries;
 		$this->load->view('model_page', $data);
+	}
+
+	public function browseModels($pPage) {
+		$models = $this->glamsex_model->browsePaginated($pPage);
+		$data['models'] = $models;
+		$data['activePage'] = $pPage;
+		$this->load->view('models', $data);
 	}
 
 	private function sortArray($pArray) {

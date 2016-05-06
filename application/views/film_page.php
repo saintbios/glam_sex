@@ -2,60 +2,19 @@
 <html lang="en">
 <head>
     <?php
-        $CI =& get_instance();
-        $CI->load->helper('url');
+        $this->load->view('head');
     ?>
-    <link href='https://fonts.googleapis.com/css?family=Signika:400,700|Open+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Erotic sex movie "<?php echo $film->name;?>" starring <?php echo $model->name;?></title>
-    <link rel="stylesheet" href="<?php echo site_url('/assets/css/bootstrap/3.3.6/bootstrap.min.css');?>">
-    <link rel="stylesheet" href="<?php echo site_url('/assets/css/global.css');?>">
-    <script src="<?php echo site_url('/assets/js/jquery/1.x/jquery-1.12.3.js');?>" crossorigin="anonymous"></script>
-    <script src="<?php echo site_url('/assets/js/bootstrap/3.3.6/bootstrap.min.js');?>"></script>
     <script src="<?php echo site_url('/assets/js/jtruncate.js');?>"></script>
-    <script>
-        function changeEmbedSrc() {
-            $('#divEmbed').html('<iframe allowfullscreen class="embed-responsive-item" src="https://static.metart.com/media/<?php echo($film->metart_id);?>/tease_<?php echo($film->metart_id);?>.mp4"></iframe>');
-            $('.btn-lecture-container').html('');
-        }
-    </script>
-    <?php require("application/libraries/UtilsMetArt.php");?>
 </head>
 <body>
-    <div class="navbar navbar-inverse" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <a href="<?php echo site_url();?>" class="navbar-brand gs-logo" title="Pretty, beautiful, radiant as the sun.">
-                    <img src="<?php echo site_url('/assets/images/logo.png');?>">
-                </a>
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            </div>
-
-            <div class="collapse navbar-collapse" id="example-navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="#">FILMS</a></li>
-                    <li><a href="#">MODELS</a></li>
-                    <li><a href="#">PHOTOS</a></li>
-                </ul>
-            <form action="" class="navbar-form navbar-right" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search for galleries, models...">
-                    <button class="btn btn-default">Search</button>
-                </div>
-            </form>
-            </div>
-        </div>
-    </div>
+    <?php
+        $this->load->view('header');
+    ?>
     
-    <div class="container player-container">
+    <div class="panel-container container player-container">
         <div class="film-title">
-            <h3><?php echo $film->name;?> <small>Published on <?php echo $film->date;?> - Starring </small><?php echo $model->name;?></h3>
+            <h3><?php echo $film->name;?><small> - Starring </small><?php echo $model->name;?><small> - Published on <?php echo $film->date;?></small></h3>
         </div>
         
         <div  id="divEmbed" class="embed-responsive embed-responsive-16by9">
@@ -66,52 +25,89 @@
         </div>
     </div>
 
-    <div class="container friendly-sites">
-        <h4 class="section-title center">Top friendly sites</h4>
-        <div class="custom-content-list">
-            <ul class="list-inline list-unstyled">
-                <li class="thumbnail-container">
-                    <a href="#">
-                        <img src="<?php echo site_url('/assets/images/default_friend.jpg');?>" class="img-thumbnail" alt="">
-                    </a>
-                    <div>
-                        <span>
-                            <a href="#">Site1.com</a>
-                        </span>
-                    </div>
-                </li>
-                <li class="thumbnail-container">
-                    <a href="#">
-                        <img src="<?php echo site_url('/assets/images/default_friend.jpg');?>" class="img-thumbnail" alt="">
-                    </a>
-                    <div>
-                        <span>
-                            <a href="#">Site2.com</a>
-                        </span>
-                    </div>
-                </li>
-                <li class="thumbnail-container">
-                    <a href="#">
-                        <img src="<?php echo site_url('/assets/images/default_friend.jpg');?>" class="img-thumbnail" alt="">
-                    </a>
-                    <div>
-                        <span>
-                            <a href="#">Site3.com</a>
-                        </span>
-                    </div>
-                </li>
-            </ul>
-        </div>
+    <div class="full-access text-center">
+        Get the movies and photos in <strong>Full HD quality and full version</strong> on Metart.com !
     </div>
-    <!-- Footer -->
-    <div class="footer text-center navbar-inverse">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h4 class="section-title center">Top friendly sites</h4>
-                </div>
+    <div class="text-center">
+        <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/signup/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Join now to get a full access</strong></button></a>
+        <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Take a free tour on Metart.com</strong></button></a>
+    </div>
+
+    <div class="panel-container container galleries-panel">
+        <?php
+        if($filmGalleries) {
+        ?>
+        <h3>Other movies starring <?php echo $model->name;?> :</h3>
+        <div id="filmsContainer" class="container">
+            <div class="element-list">
+                <ul class="list-inline list-unstyled">
+                    <?php
+                    foreach($filmGalleries as $filmGallery) {
+                    ?>
+                        <li class="gallery-img-container">
+                            <a href="<?php echo site_url('/film/' . $filmGallery->id . '/' . UtilsMetArt::toAscii($filmGallery->name));?>">
+                                <img class="img-responsive" src="<?php echo site_url('/assets/images/galleries/' . $filmGallery->id . '/glam-sex_' . $filmGallery->id . '_cover.jpg');?>" alt="Erotic nude movie : <?php echo($filmGallery->name);?>" title="Erotic nude movie : <?php echo($filmGallery->name);?>">
+                            </a>
+                            <div class="additional-info-thumbnail-under row">
+                                <div class="additional-info-thumbnail-under-model col-xs-12 col-md-6">
+                                    <a href="<?php echo site_url('/film/' . $filmGallery->id . '/' . UtilsMetArt::toAscii($filmGallery->name));?>"><?php echo($filmGallery->name);?></a>
+                                </div>
+                                <div class="additional-info-thumbnail-under-cplt col-xs-12 col-md-6">
+                                    <span class=""><?php echo(date('M d, Y', strtotime($filmGallery->date)));?></span>
+                                </div>
+                            </div>
+                        </li>
+                    <?php
+                    }
+                    ?>
+                </ul>
             </div>
         </div>
+        <?php
+        }
+        if($photoGalleries) {
+        ?>
+        <h3>Photo galleries starring <?php echo $model->name;?> :</h3>
+        <div id="photosContainer" class="container">
+            <div class="element-list">
+                <ul class="list-inline list-unstyled">
+                    <?php
+                    foreach($photoGalleries as $photoGallery) {
+                    ?>
+                        <li class="gallery-img-container">
+                            <a href="<?php echo site_url('/photos/'.$photoGallery->id.'/'.UtilsMetArt::toAscii($photoGallery->name));?>">                                
+                                <img class="img-responsive" src="<?php echo site_url('/assets/images/galleries/' . $photoGallery->id . '/glam-sex_' . $photoGallery->id . '_cover.jpg');?>" alt="Erotic nude gallery : <?php echo($photoGallery->name);?>" title="Erotic nude gallery : <?php echo($photoGallery->name);?>">
+                            </a>
+                            <div class="additional-info-thumbnail-under row">
+                                <div class="additional-info-thumbnail-under-model col-xs-12 col-md-6">
+                                    <a href="<?php echo site_url('/photos/'.$photoGallery->id.'/'.UtilsMetArt::toAscii($photoGallery->name));?>"><?php echo($photoGallery->name);?></a>
+                                </div>
+                                <div class="additional-info-thumbnail-under-cplt col-xs-12 col-md-6">
+                                    <span class=""><?php echo(date('M d, Y', strtotime($photoGallery->date)));?></span>
+                                </div>
+                            </div>
+                        </li>
+                    <?php
+                    }
+                    ?>
+                </ul>
+            </div>
+        </div>
+        <?php
+        }
+        ?>
     </div>
+
+    <div class="full-access text-center">
+        Get the movies and photos in <strong>Full HD quality and full version</strong> on Metart.com !
+    </div>
+    <div class="text-center">
+        <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/signup/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Join now to get a full access</strong></button></a>
+        <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Take a free tour on Metart.com</strong></button></a>
+    </div>
+
+    <?php
+        $this->load->view('footer');
+    ?>
 </body>
 </html> 

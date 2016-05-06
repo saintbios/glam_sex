@@ -9,6 +9,14 @@ class Download_photos_files extends CI_Controller {
 		$this->zipDestinationFolder = './assets/img_packages/';
 		$this->imgsDestinationFolder = './assets/images/galeries/';
 		set_time_limit(0);
+
+		if(!isset($_SESSION))
+			session_start();
+
+		if(!isset($_SESSION['logged']) || $_SESSION['logged'] == false) {
+			echo "You must be logged fuccboi";
+			exit(0);
+		}
 	}
 	
 	public function init($pLimit) {

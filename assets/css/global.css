@@ -15,7 +15,12 @@
     }
 
     .navbar-brand {
-        margin-right: 50px
+        margin-right: 20px
+    }
+
+    .nav>li>a {
+        padding-left:10px;
+        padding-right:10px;
     }
 
     .list-inline>li.gallery-img-container, .list-inline>li.model-img-container {
@@ -165,12 +170,12 @@
     }
 
     .gallery-img-container  a:hover img {
-        -webkit-filter: contrast(130%);
+        -webkit-filter: contrast(120%);
         filter:sepia(130%);
     }
 
     .model-img-container  a:hover img {
-        -webkit-filter: contrast(130%);
+        -webkit-filter: contrast(120%);
         filter:sepia(50%);
     }
 
@@ -185,7 +190,6 @@
     .additional-info-thumbnail-under {
         color: #222;
         padding: 2px 3px 0 3px;
-        background-color:#FFF;
         height:22px;
         font-size: 12px
     }
@@ -207,11 +211,20 @@
         float: right;
     }
 
-    @media (min-width: 970px){
-        .additional-info-thumbnail-under-cplt {
+    @media (min-width: 970px) {
+        #filmsContainer .additional-info-thumbnail-under-cplt, #photosContainer .additional-info-thumbnail-under-cplt {
             text-align: right;
         }
     }
+
+
+
+    @media (min-width: 1200px){
+        #modelsContainer .additional-info-thumbnail-under-cplt {
+            text-align: right;
+        }
+    }
+   
 
     /*************/
     /*PAGE PHOTOS*/
@@ -219,7 +232,7 @@
     blockquote {
         background: #F5F5F5;
         border-left: 6px solid #ccc;
-        margin-bottom:15px;
+        margin-bottom:0px;
         padding: 0.5em 10px;
         quotes: "\201C""\201D""\2018""\2019";
     }
@@ -251,7 +264,7 @@
     @media (min-width: 720px){
         .gallery-panel {
             float:left;
-            width:49%;
+            width:49.3%;
             margin-right:5px;
         }
 
@@ -407,8 +420,25 @@
         }
     }
 
+    /*************/
+    /*PAGE FILMS */
+    /*************/
+    .film-title {
+        margin-bottom:15px;
+    }
+
+    .film-title>h3 {
+        font-size:18px;
+        font-weight:bold;
+        margin : 0;
+    }
+
     .player-container {
-        position:relative
+        position:relative;
+        border:1px solid #DDD;
+        background-color:#F2F2F2;
+        padding-bottom: 10px;
+        padding-top:10px;
     }
 
     .embed-responsive img {
@@ -430,19 +460,8 @@
 
     .btn-lecture:hover {
         cursor:pointer;
-    }
-
-    /*************/
-    /*PAGE FILMS */
-    /*************/
-    .film-title {
-        margin-bottom:15px;
-    }
-
-    .film-title>h3 {
-        font-size:18px;
-        font-weight:bold;
-        margin : 0;
+        -webkit-filter: contrast(120%);
+        filter:contrast(120%);
     }
 
     /**************/
@@ -458,17 +477,17 @@
         background-color:#F2F2F2;
     }
 
-    .model-galleries-panel {
+    .galleries-panel {
         border:1px solid #DDD;
         background-color:#F2F2F2;
         padding-bottom: 10px;
     }
 
-    .model-galleries-panel h3 {
+    .galleries-panel h3 {
         padding-top:10px;
     }
 
-    .model-panel h3, .model-galleries-panel h3 {
+    .model-panel h3, .galleries-panel h3 {
         font-size:18px;
         font-weight:bold;
         margin : 0;
@@ -476,4 +495,38 @@
 
     .modal-content {
         max-width: 555px;
+    }
+
+    .btn-primary {
+        white-space:normal;
+    }
+
+    .footer {
+        height:30px;
+    }
+
+    .copyright-footer {
+        padding-top:5px;
+        color: #9D9D9D;
+        font-size:12px;
+    }
+
+    .thumbnail-friend-container {
+        width: 20%!important;
+        float: left;
+        min-width:100px;
+    }
+
+    .thumbnail-friend-container  a:hover img {
+        -webkit-filter: contrast(120%);
+        filter:sepia(120%);
+    }
+
+    .pagination-list {
+        margin-top:10px;
+    }
+
+    .activePageNumber {
+        font-weight:bold;
+        color: #000;
     }

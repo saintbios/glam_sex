@@ -8,6 +8,14 @@ class Download_movie_files extends CI_Controller {
 		parent::__construct();
 		$this->imgsDestinationFolder = './assets/images/galleries/';
 		set_time_limit(0);
+
+		if(!isset($_SESSION))
+			session_start();
+
+		if(!isset($_SESSION['logged']) || $_SESSION['logged'] == false) {
+			echo "You must be logged fuccboi";
+			exit(0);
+		}
 	}
 	
 	public function init($pLimit) {

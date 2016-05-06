@@ -260,6 +260,22 @@ CREATE TABLE IF NOT EXISTS `tag` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9986 DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `login` VARCHAR(128) NOT NULL ,
+  `password` CHAR(40) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL ,
+  `last_connection` DATETIME NULL ,
+  PRIMARY KEY (`login`)
+) ENGINE = MyISAM;
+
+-- --------------------------------------------------------
+
 --
 -- Contraintes pour les tables exportées
 --

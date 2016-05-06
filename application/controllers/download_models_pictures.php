@@ -9,6 +9,14 @@ class Download_models_pictures extends CI_Controller {
 		$this->load->model('glamsex_model', NULL, TRUE);
 		$this->imgsDestinationFolder = './assets/images/models/';
 		set_time_limit(0);
+
+		if(!isset($_SESSION))
+			session_start();
+
+		if(!isset($_SESSION['logged']) || $_SESSION['logged'] == false) {
+			echo "You must be logged fuccboi";
+			exit(0);
+		}
 	}
 	
 	public function init($pLimit) {

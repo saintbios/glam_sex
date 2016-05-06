@@ -14,5 +14,25 @@ class UtilsMetArt {
 
 		return $clean;
 	}
+
+	public function sortArray($pArray) {
+		$ordered = false;
+	    $size = count($pArray);
+	    while(!$ordered){
+	        $ordered = true;
+	        for($i=0 ; $i < $size-1 ; $i++) {
+	            if($pArray[$i]->date > $pArray[$i+1]->date)
+	            {
+	                $temp = $pArray[$i+1];
+	                $pArray[$i+1] = $pArray[$i];
+	                $pArray[$i] = $temp;
+	                $ordered = false;
+	            }
+	        }
+	        $size--;
+	    }
+	    $pArray = array_reverse($pArray);
+	    return $pArray;
+	}
 }
 ?>

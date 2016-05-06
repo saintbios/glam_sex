@@ -11,6 +11,14 @@ class Init_data extends CI_Controller {
 		$this->load->model('glamsex_model', NULL, TRUE);
 		$this->load->model('gallery', NULL, TRUE);
 		set_time_limit(0);
+
+		if(!isset($_SESSION))
+			session_start();
+
+		if(!isset($_SESSION['logged']) || $_SESSION['logged'] == false) {
+			echo "You must be logged fuccboi";
+			exit(0);
+		}
 	}
 	
 	public function photographers($pStartDate, $pStopDate) {

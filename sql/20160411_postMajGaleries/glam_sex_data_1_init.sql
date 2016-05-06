@@ -156,6 +156,13 @@ INSERT INTO `shaved_type` (`id`, `label`) VALUES
 (4, 'Trimmed'),
 (1, 'Undefined');
 
+--
+-- Contenu de la table `user`
+--
+
+INSERT INTO `user` (`login`, `password`, `last_connection`) VALUES
+('saintbios', 'f43812ca8542ede82b17d4d2f0f2983d53078ea3', NULL);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

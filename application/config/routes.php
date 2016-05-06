@@ -55,3 +55,6 @@ $route['translate_uri_dashes'] = FALSE;
 $route['photos/(:num)/(:any)'] = 'galleries/displayPhotoGallery/$1/$2';
 $route['film/(:num)/(:any)'] = 'galleries/displayMovieGallery/$1/$2';
 $route['model/(:num)/(:any)'] = 'models/displayModel/$1/$2';
+$route['models/(:num)'] = 'models/browseModels/$1';
+$route['galleries/films/(:num)'] = 'galleries/browseAllMovieGalleries/$1';
+$route['galleries/photos/(:num)'] = 'galleries/browseAllPhotoGalleries/$1';

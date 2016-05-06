@@ -35,34 +35,63 @@ class Glamsex_model extends CI_Model
 	public function getLast($pLimit = null) {
 		$return_data = array();
 		
-		$this->db->order_by('id', 'DESC');
-		$this->db->where('active', 1);
-		$this->db->where('headshot_width', 229);
+		$query = $this->db->query("select * from model m
+		where active = 1
+		and headshot_width = 229
+		and (select count(gallery_id)
+			from model_gallery mg 
+		    where mg.model_id = m.id
+		    and (
+		        select count(id)
+		        from gallery g
+		        where g.id = mg.gallery_id
+		        and g.active = 1
+		        ) > 0
+			) > 0
+		order by m.id desc limit " . $pLimit);
+        
+        $results = $query->result();
+        return $results;
+	}
 
-		if($pLimit) {
-			$this->db->limit($pLimit+40);
-		}
-		
-		if(! $query = $this->db->get('model')) {
-			return $this->db->error();
-		} else {
-			if ($query->num_rows() > 0) {
-				$models = array();
-				$cpt = 0;
-				foreach($query->result() as $model) {
-					if($this->hasActiveGalleries($model->id)) {
-						$models[] = $model;
-						$cpt++;
-					}
+	public function getNbActive() {
+		$query = $this->db->query("select count(id) as nbActive from model m
+		where active = 1
+		and headshot_width = 229
+		and (select count(gallery_id)
+			from model_gallery mg 
+		    where mg.model_id = m.id
+		    and (
+		        select count(id)
+		        from gallery g
+		        where g.id = mg.gallery_id
+		        and g.active = 1
+		        ) > 0
+			) > 0
+		order by m.id asc");
 
-					if($cpt == $pLimit) {
-						return $models;
-					}
-				}
-			} else {
-				return false;
-			}
-		}
+		$nbActiveModels = $query->row();
+		return $nbActiveModels;
+	}
+
+	public function browsePaginated($pPage) {
+		$query = $this->db->query("select * from model m
+		where active = 1
+		and headshot_width = 229
+		and (select count(gallery_id)
+			from model_gallery mg 
+		    where mg.model_id = m.id
+		    and (
+		        select count(id)
+		        from gallery g
+		        where g.id = mg.gallery_id
+		        and g.active = 1
+		        ) > 0
+			) > 0
+		order by m.id desc limit " . $_SESSION['itemsPerPage']*($pPage-1) . "," . $_SESSION['itemsPerPage']);
+        
+        $results = $query->result();
+        return $results;
 	}
 
 	private function hasActiveGalleries($pModelId) {

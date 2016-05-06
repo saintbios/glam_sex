@@ -2,17 +2,9 @@
 <html lang="en">
 <head>
     <?php
-        $CI =& get_instance();
-        $CI->load->helper('url');
+        $this->load->view('head');
     ?>
-    <link href='https://fonts.googleapis.com/css?family=Signika:400,700|Open+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Erotic nude photos of <?php echo $model->name;?> - shooting "<?php echo $gallery->name;?>"</title>
-    <link rel="stylesheet" href="<?php echo site_url('/assets/css/bootstrap/3.3.6/bootstrap.min.css');?>">
-    <link rel="stylesheet" href="<?php echo site_url('/assets/css/global.css');?>">
-    <script src="<?php echo site_url('/assets/js/jquery/1.x/jquery-1.12.3.js');?>" crossorigin="anonymous"></script>
-    <script src="<?php echo site_url('/assets/js/bootstrap/3.3.6/bootstrap.min.js');?>"></script>
     <script src="<?php echo site_url('/assets/js/jtruncate.js');?>"></script>
     <script>
         $().ready(function() {  
@@ -26,44 +18,12 @@
               lessAni: 0
              });
         });
-
-        function updateActiveSlider(pId) {
-            $('.carousel-inner>div, .active').removeClass("active");
-            $('#slider_img_'+pId).addClass("active");
-        }
     </script>
-    <?php require("application/libraries/UtilsMetArt.php");?>
 </head>
 <body>
-    <div class="navbar navbar-inverse" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <a href="<?php echo site_url();?>" class="navbar-brand gs-logo" title="Pretty, beautiful, radiant as the sun.">
-                    <img src="<?php echo site_url('/assets/images/logo.png');?>">
-                </a>
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            </div>
-
-            <div class="collapse navbar-collapse" id="example-navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="#">FILMS</a></li>
-                    <li><a href="#">MODELS</a></li>
-                    <li><a href="#">PHOTOS</a></li>
-                </ul>
-            <form action="" class="navbar-form navbar-right" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search for galleries, models...">
-                    <button class="btn btn-default">Search</button>
-                </div>
-            </form>
-            </div>
-        </div>
-    </div>
+    <?php
+        $this->load->view('header');
+    ?>
     
     <div class="panel-group container gallery-header-panels">
         <div class="panel gallery-panel">
@@ -84,13 +44,9 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="gallery-description" id="gallery-description">
-                    <div style="width:100%;border-bottom:1px solid #DDD;margin-bottom:10px">Shooting description :</div>
+                    <div style="width:100%;border-bottom:1px solid #DDD;margin-bottom:10px">Photograph :</div>
                     <?php
-                    if($gallery->long_description == "") {
-                        echo '<p>No description has been written yet for this gallery.</p>';
-                    } else {
-                        echo '<p>' . $gallery->long_description . '</p>';
-                    }
+                        echo $gallery->photographerName;                    
                     ?>
                 </div>
             </div>
@@ -130,16 +86,17 @@
                 <div class="model-description">
                     <div style="width:100%;border-bottom:1px solid #DDD;margin-bottom:10px">Biography :</div>
                     <?php
-                    if(($model->bio == "") || ($model->bio == 0)) {
+                    if(strlen($model->bio) <= 1) {
                         echo '<p>' . $model->name . ' has not written her biography yet.</p>';
                     } else {
-                        echo '<p>' . $model->bio . '</p>';
+                        echo '<p>' . stripslashes ($model->bio) . '</p>';
                     }
                     ?>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="full-access text-center">
         This gallery contains <strong><?php echo $gallery->number_of_pics;?> Full HD nude photos</strong> on its full version on Metart.com !
     </div>
@@ -147,6 +104,7 @@
         <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/signup/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Join now to get a full access</strong></button></a>
         <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Take a free tour on Metart.com</strong></button></a>
     </div>
+
     <div class="panel container element-list gallery-img-list-container">
         <ul class="list-unstyled list-inline">
             <?php
@@ -155,8 +113,8 @@
             }
             ?>
         </ul>
-
     </div>
+
     <div class="full-access text-center">
         This gallery contains <strong><?php echo $gallery->number_of_pics;?> FullHD nude photos</strong> on its full version on Metart.com !
     </div>
@@ -164,54 +122,6 @@
         <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/signup/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Join now to get a full access</strong></button></a>
         <a href="http://access.met-art.com/track/1025.MA.1.2.5.0.0/" target="_blank"><button type="button" class="btn btn-primary text-uppercase btn-full-access"><strong>Take a free tour on Metart.com</strong></button></a>
     </div>    
-
-    <div class="container friendly-sites">
-        <h4 class="section-title center">Top friendly sites</h4>
-        <div class="custom-content-list">
-            <ul class="list-inline list-unstyled">
-                <li class="thumbnail-container">
-                    <a href="#">
-                        <img src="<?php echo site_url('/assets/images/default_friend.jpg');?>" class="img-thumbnail" alt="">
-                    </a>
-                    <div>
-                        <span>
-                            <a href="#">Site1.com</a>
-                        </span>
-                    </div>
-                </li>
-                <li class="thumbnail-container">
-                    <a href="#">
-                        <img src="<?php echo site_url('/assets/images/default_friend.jpg');?>" class="img-thumbnail" alt="">
-                    </a>
-                    <div>
-                        <span>
-                            <a href="#">Site2.com</a>
-                        </span>
-                    </div>
-                </li>
-                <li class="thumbnail-container">
-                    <a href="#">
-                        <img src="<?php echo site_url('/assets/images/default_friend.jpg');?>" class="img-thumbnail" alt="">
-                    </a>
-                    <div>
-                        <span>
-                            <a href="#">Site3.com</a>
-                        </span>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <!-- Footer -->
-    <div class="footer text-center navbar-inverse">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h4 class="section-title center">Top friendly sites</h4>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="modalCover" tabindex="-1" role="dialog">
@@ -283,5 +193,9 @@
         </div>
       </div>
     </div>
+
+    <?php
+        $this->load->view('footer');
+    ?>
 </body>
 </html> 
