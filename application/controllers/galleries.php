@@ -7,7 +7,7 @@ class Galleries extends CI_Controller {
 	{
 		// Construct our parent class
 		parent::__construct();
-		$this->load->library('utilsmetart');
+		$this->load->library('UtilsMetArt');
 		$this->load->model('photographer', NULL, TRUE);
 		$this->load->model('glamsex_model', NULL, TRUE);
 		$this->load->model('gallery', NULL, TRUE);

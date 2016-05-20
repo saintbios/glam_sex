@@ -8,8 +8,13 @@ RewriteEngine on
 #   Fixe les règles de réécriture d'URL. Ici, nous utilisons une liste blanche.
 #
 
-#   Toutes les URL qui ne correspondent pas à ces masques sont réécrites.
-RewriteCond $1 !^(index\.php|assets/|robots\.txt)
-
-#   Toutes les autres URL vont être redirigées vers le fichier index.php.
+### Indique explicitement la racine du site
+#RewriteBase /
+### Empêche la redirection automatique vers la page d'accueil
+#RewriteCond %{REQUEST_FILENAME} !-f
+### Exclut les URL correspondants à un fichier réel
+#RewriteCond %{REQUEST_FILENAME} !-d
+### Toutes les URL qui ne correspondent pas a ces masques sont reecrites.
+RewriteCond $1 !^(index.php|assets|robots.txt|sitemap.xml)
+### Toutes les autres URL vont etre redirigées vers le fichier index.php
 RewriteRule ^(.*)$ index.php/$1 [L]

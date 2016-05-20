@@ -366,7 +366,8 @@ class Gallery extends CI_Model
 				'number_of_pics' => $pGallery->number_of_pics,
 				'rating_date' => date('Y-m-d'),
 				'cover_url' => $pGallery->cover,
-				'metart_id' => $metArtId
+				'metart_id' => $metArtId,
+				'external_link' => $pGallery->link
 		);
 		$this->db->where('id', $pId);
 		$this->db->update('gallery', $update_data);

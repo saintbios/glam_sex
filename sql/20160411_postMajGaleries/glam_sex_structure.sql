@@ -17,10 +17,9 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `glam_sex`
+-- Base de données :  `glamsexcia1`
 --
-CREATE DATABASE IF NOT EXISTS `glam_sex` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `glam_sex`;
+USE `glamsexcia1`;
 
 -- --------------------------------------------------------
 

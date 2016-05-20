@@ -23,7 +23,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
+/* DEVELOPMENT */
 $config['base_url'] = '/glam_sex/';
+
+/* PRODUCTION */
+//$config['base_url'] = 'http://www.glam-sex.com/';
 
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +56,8 @@ $config['index_page'] = '';
 |
 | WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
 */
-$config['uri_protocol']	= 'REQUEST_URI';
+#$config['uri_protocol']	= 'REQUEST_URI';
+$config['uri_protocol']	= 'AUTO';
 
 /*
 |--------------------------------------------------------------------------
@@ -114,7 +119,8 @@ $config['enable_hooks'] = FALSE;
 | https://codeigniter.com/user_guide/general/creating_libraries.html
 |
 */
-$config['subclass_prefix'] = 'MY_';
+//$config['subclass_prefix'] = 'MY_';
+$config['subclass_prefix'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -213,7 +219,10 @@ $config['directory_trigger'] = 'd';
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 0;
+/* DEVELOPMENT */
+$config['log_threshold'] = 4;
+/* PRODUCTION */
+//$config['log_threshold'] = 0;
 
 /*
 |--------------------------------------------------------------------------

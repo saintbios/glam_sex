@@ -26,6 +26,7 @@ class Update_galleries_date extends CI_Controller {
 		//Galleries details
 		$fields = array(
 				'name',
+				'link',
 				'date',
 				'rating',
 				'number_of_pics',

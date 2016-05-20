@@ -3,8 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Init_data extends CI_Controller {
 
-	function __construct()
-	{
+	function __construct() {
 		// Construct our parent class
 		parent::__construct();
 		$this->load->library('apimetart');
@@ -25,19 +24,26 @@ class Init_data extends CI_Controller {
 	public function init($pStartDate, $pStopDate)
 	{
 		//Photographers details
-		$photographers = $this->apimetart->getMetArtObjectsFromApi($pStartDate, $pStopDate, 'Photographer', 'latest-photographer', 100);
+		$photographers = $this->apimetart->getMetArtObjectsFromApi($pStartDate, $pStopDate, 'Photographer', 'latest-photographer', null, 100);
 		$this->initPhotographers($photographers);
 		
 		//Models details
-		$models = $this->apimetart->getMetArtObjectsFromApi($pStartDate, $pStopDate, 'Model', 'latest-model', 100);
+		$models = $this->apimetart->getMetArtObjectsFromApi($pStartDate, $pStopDate, 'Model', 'latest-model', null, 100);
 		$this->initModels($models);
 		
-		//FHG galleries without details
-		$fhgGalleries = $this->apimetart->getMetArtObjectsFromApi($pStartDate, $pStopDate, 'MarketingTool', 'latest-marketingTool', 300);
+		//FHG photo galleries without details
+		$fhgGalleries = $this->apimetart->getMetArtObjectsFromApi($pStartDate, $pStopDate, 'MarketingTool', 'latest-marketingTool', null, 300);
 		$this->initGalleries($fhgGalleries);
 		
+		//FHG movie galleries without details
+		if($fhgMovieGalleries = $this->apimetart->getMetArtObjectsFromApi($pStartDate, $pStopDate, 'GalleryMovies', 'latest-gallery', null, $pLimit)) {
+			$this->initGalleries($fhgMovieGalleries, 'detailedMovie');
+		} else {
+			echo '<p>Aucune gallerie a inserer pour cette periode</p>';
+		}
+
 		//Galleries details
-		$galleries = $this->apimetart->getMetArtObjectsFromApi($pStartDate, $pStopDate, 'Gallery', 'latest-gallery', 300);
+		$galleries = $this->apimetart->getMetArtObjectsFromApi($pStartDate, $pStopDate, 'Gallery', 'latest-gallery', null, 300);
 		$this->completeGalleries($galleries);
 	}
 	
